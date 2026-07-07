@@ -1,0 +1,1 @@
+export { ChainRuleViz } from './TangentSecant';

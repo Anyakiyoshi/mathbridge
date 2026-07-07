@@ -1,0 +1,1 @@
+export { HigherDerivViz } from './TangentSecant';

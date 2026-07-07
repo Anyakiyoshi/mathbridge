@@ -1,0 +1,10 @@
+@import 'katex/dist/katex.min.css';
+
+/* App.css — minimal overrides for MathBridge */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border: none;
+  text-align: left;
+}
