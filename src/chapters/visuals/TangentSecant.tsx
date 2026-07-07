@@ -156,7 +156,6 @@ function drawMiniPanel(
   f: (x: number) => number, markX: number, markY: number
 ) {
   const c = createCoordTransform(panelW, panelH, xMin, xMax, yMin, yMax, pad);
-  const axesCtx = { ...ctx };
   // Offset all drawing by offsetX
   ctx.save();
   ctx.translate(offsetX, 0);
@@ -233,7 +232,7 @@ export function HigherDerivViz() {
       ctx.beginPath();
       for (let i = 0; i <= 400; i++) {
         const x = xMin + (xMax - xMin) * i / 400;
-        let y = 0, term = x;
+        let y = 0;
         for (let k = 0; k <= degree; k++) {
           if (k % 2 === 1) {
             const sign = (k % 4 === 1) ? 1 : -1;

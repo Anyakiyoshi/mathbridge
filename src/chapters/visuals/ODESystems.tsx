@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import MathCanvas, { createCoordTransform, drawAxes } from '../../components/MathCanvas';
-import ControlPanel, { MatrixInput2x2 } from '../../components/ControlPanel';
+import { MatrixInput2x2 } from '../../components/ControlPanel';
 import { eigen2x2 } from '../../utils/linearAlgebra';
 import type { Matrix2D } from '../../utils/linearAlgebra';
 

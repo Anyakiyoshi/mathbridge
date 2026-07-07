@@ -7,8 +7,6 @@ export function PartialDerivViz() {
   const [x0, setX0] = useState(1.0);
   const [y0, setY0] = useState(0.8);
 
-  const f = (x: number, y: number) => x * x + y * y;
-
   const draw = useCallback(
     (ctx: CanvasRenderingContext2D, _coord: ReturnType<typeof createCoordTransform>, w: number, h: number) => {
       const xMin = -2, xMax = 2, yMin = -2, yMax = 2;

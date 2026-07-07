@@ -23,7 +23,6 @@ export function DoubleIntegralViz() {
           const x = a + (bu - a) * i / res;
           const y = cu + (d - cu) * j / res;
           const z = f(x, y);
-          const shade = Math.floor(100 + z * 30);
           ctx.fillStyle = `rgba(26,115,232,${0.1 + z * 0.08})`;
           const [px1, py1] = c.toPixel(x, y);
           const [px2, py2] = c.toPixel(x + (bu - a) / res, y + (d - cu) / res);
@@ -39,7 +38,7 @@ export function DoubleIntegralViz() {
         for (let j = 0; j < ny; j++) {
           const xMid = a + (i + 0.5) * dx;
           const yMid = cu + (j + 0.5) * dy;
-          const zVal = f(xMid, yMid);
+          const _zVal = f(xMid, yMid); void _zVal;
           const [px1, py1] = c.toPixel(a + i * dx, cu + j * dy);
           const [px2, py2] = c.toPixel(a + (i + 1) * dx, cu + (j + 1) * dy);
           ctx.strokeStyle = 'rgba(255, 100, 0, 0.5)';
@@ -48,7 +47,7 @@ export function DoubleIntegralViz() {
         }
       }
 
-      const approxVol = f(0, 0) * (bu - a) * (d - cu) / (nx * ny); // rough
+      const _approxVol = f(0, 0) * (bu - a) * (d - cu); void _approxVol;
       ctx.fillStyle = '#333';
       ctx.font = '12px sans-serif';
       ctx.fillText(`网格 ${nx}×${ny}  区域 [-1,1]×[-1,1]`, 10, h - 15);

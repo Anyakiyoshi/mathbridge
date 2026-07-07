@@ -30,7 +30,7 @@ export function AntiderivViz() {
       // Family F(x) = x² + C
       const cs = [cVal, cVal + 3, cVal - 2, cVal - 4];
       const colors = ['#1a73e8', '#2ecc71', '#9b59b6', '#e74c3c'];
-      cs.forEach((c, idx) => {
+      cs.forEach((cVal2, idx) => {
         ctx.save();
         ctx.strokeStyle = colors[idx];
         ctx.lineWidth = idx === 0 ? 2.5 : 1;
@@ -38,7 +38,7 @@ export function AntiderivViz() {
         ctx.beginPath();
         for (let i = 0; i <= 400; i++) {
           const x = xMin + (xMax - xMin) * i / 400;
-          const [px, py] = c.toPixel(x, x * x + c);
+          const [px, py] = c.toPixel(x, x * x + cVal2);
           i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
         }
         ctx.stroke();

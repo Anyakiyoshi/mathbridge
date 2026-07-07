@@ -100,17 +100,13 @@ export function ContinuityViz() {
       } else if (type === 'oscillating') {
         // sin(1/x)
         ctx.beginPath();
-        let prevY = 0;
         for (let i = 0; i <= steps; i++) {
           const x = xMin + (xMax - xMin) * i / steps;
           if (Math.abs(x) < 0.001) continue;
-          const y = Math.sin(1 / x);
-          // Clamp y
-          const cy = Math.max(-2, Math.min(2, y));
+          const cy = Math.max(-2, Math.min(2, Math.sin(1 / x)));
           const [px, py] = c.toPixel(x, cy);
           if (i === 0 || Math.abs(x - xMin) < 0.001) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
-          prevY = cy;
         }
         ctx.stroke();
         // Shade the oscillation zone around x=0

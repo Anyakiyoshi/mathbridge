@@ -33,8 +33,8 @@ export function FTCViz() {
       // Shaded area from 0 to x
       ctx.save();
       ctx.fillStyle = 'rgba(26, 115, 232, 0.2)';
-      const [x0] = c.toPixel(0, 0);
-      const [xx, xy0] = c.toPixel(x, 0);
+      const [vx, vy1] = c.toPixel(x, 0);
+      const [vx2, vy2] = c.toPixel(x, f(x));
       // Fill area under curve
       ctx.beginPath();
       const [px0, py0] = c.toPixel(0, f(0));
@@ -44,13 +44,11 @@ export function FTCViz() {
         const [px, py] = c.toPixel(t, f(t));
         ctx.lineTo(px, py);
       }
-      ctx.lineTo(xx, xy0);
+      ctx.lineTo(vx, vy1);
       ctx.closePath();
       ctx.fill();
 
       // Vertical line at x
-      const [vx, vy1] = c.toPixel(x, 0);
-      const [vx2, vy2] = c.toPixel(x, f(x));
       ctx.strokeStyle = '#1a73e8';
       ctx.lineWidth = 1.5;
       ctx.setLineDash([4, 3]);
