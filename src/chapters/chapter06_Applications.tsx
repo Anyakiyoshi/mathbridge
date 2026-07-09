@@ -9,7 +9,6 @@ export const chapter06: Chapter = {
     {
       id: 'ch06-area', title: 'Area & Volume of Revolution', titleZh: '面积 & 旋转体体积',
       visual: VolumeViz,
-      laBridgeZh: '计算面积和体积的积分公式本质上是"累加无穷小量"——这和高维空间的体积张量（Jacobian 行列式）思想一致。多重积分中你会看到完整的形式。',
       content: () => (
         <div className="section-content">
           <h2>6.1 平面面积</h2>

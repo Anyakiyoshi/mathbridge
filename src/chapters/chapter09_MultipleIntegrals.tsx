@@ -9,7 +9,6 @@ export const chapter09: Chapter = {
     {
       id: 'ch09-double', title: 'Double Integrals', titleZh: '二重积分的几何意义',
       visual: DoubleIntegralViz,
-      laBridgeZh: '二重积分 ∬ f(x,y)dxdy 可以看作对函数 f 和常函数 1 的"连续内积"。划分区域→求和→取极限的过程直接对应着多重线性代数中的张量积概念。Jacobian 行列式出现在换元公式中——这是线性变换 det(A) 的推广。',
       content: () => (
         <div className="section-content">
           <h2>9.1 二重积分</h2>

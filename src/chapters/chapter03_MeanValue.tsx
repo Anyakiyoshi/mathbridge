@@ -9,7 +9,6 @@ export const chapter03: Chapter = {
     {
       id: 'ch03-mvt', title: "Rolle & Lagrange's MVT", titleZh: '罗尔定理 & 拉格朗日中值定理',
       visual: RolleLagrangeViz,
-      laBridgeZh: '中值定理保证了"存在性"——这是一种典型的分析学工具。在数值线性代数中，许多迭代方法（如共轭梯度法）也依赖类似的"存在性"保证。',
       content: () => (
         <div className="section-content">
           <h2>3.1 微分中值定理</h2>

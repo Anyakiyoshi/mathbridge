@@ -11,7 +11,6 @@ export const chapter01: Chapter = {
     {
       id: 'ch01-limits', title: 'Limit Definition (ε-δ)', titleZh: '极限的 ε-δ 定义',
       visual: EpsilonDeltaViz,
-      laBridgeZh: 'ε-δ 定义中的逻辑结构——"对任意 ε>0, 存在 δ>0"——是分析学的标志性语言。在泛函分析中，这个定义被推广为度量空间中的收敛：d(f(x), L)→0。极限、连续、收敛本质上都是"距离趋于零"——线性代数中的范数正是用来度量这种距离的工具。',
       content: () => (
         <div className="section-content">
           <h2>1.1 极限的 ε-δ 定义</h2>
@@ -95,7 +94,6 @@ export const chapter01: Chapter = {
     {
       id: 'ch01-laws', title: 'Limit Laws & Important Limits', titleZh: '极限运算法则 & 两个重要极限',
       visual: LimitLawsViz,
-      laBridgeZh: '极限的四则运算表明极限运算和代数运算可交换——这在泛函分析中对应着"极限算子是有界线性算子"。夹逼准则暗示了序结构与拓扑结构的相容性，这是 Riesz 空间理论的基础。两个重要极限则揭示了指数函数和三角函数的深层联系——e^(iπ)+1=0 的雏形。',
       content: () => (
         <div className="section-content">
           <h2>1.2 极限运算法则 & 两个重要极限</h2>
@@ -164,7 +162,6 @@ export const chapter01: Chapter = {
     {
       id: 'ch01-continuity', title: 'Continuity & Discontinuities', titleZh: '连续性 & 间断点',
       visual: ContinuityViz,
-      laBridgeZh: '连续函数构成一个无穷维向量空间 C[a,b]——这是泛函分析中最基本的研究对象。紧集上的连续函数可以被多项式一致逼近（Weierstrass 逼近定理）——这和泰勒级数、傅里叶级数一样，都是"用基函数线性组合逼近任意函数"的思想。连续性和线性的交汇是数学分析的永恒主题。',
       content: () => (
         <div className="section-content">
           <h2>1.3 函数的连续性</h2>

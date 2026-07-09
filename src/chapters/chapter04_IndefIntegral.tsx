@@ -12,7 +12,6 @@ export const chapter04: Chapter = {
     {
       id: 'ch04-concept', title: 'Antiderivative & Indefinite Integral', titleZh: '原函数与不定积分概念',
       visual: AntiderivViz,
-      laBridgeZh: '求导 d/dx 是一个线性变换，不定积分 ∫ dx 是它的逆——但不是唯一的逆，因为 ker(d/dx) = 常值函数。这在线性代数中对应着"线性映射的核空间"：逆映射只在商空间上是唯一确定的。',
       content: () => (
         <div className="section-content">
           <h2>4.1 原函数与不定积分</h2>
@@ -61,7 +60,6 @@ export const chapter04: Chapter = {
     {
       id: 'ch04-substitution', title: 'u-Substitution', titleZh: '第一类换元法（凑微分）',
       visual: SubstitutionViz,
-      laBridgeZh: "换元法本质上是积分变量变换——类似于线性代数中的基变换。令 u=g(x)，则 ∫f(g(x))g'(x)dx = ∫f(u)du。链式法则的变量替换对应着 Jacobian 行列式为 1 的特例。",
       content: () => (
         <div className="section-content">
           <h2>4.2 第一类换元法（凑微分法）</h2>
@@ -112,7 +110,6 @@ export const chapter04: Chapter = {
     {
       id: 'ch04-parts', title: 'Integration by Parts & Partial Fractions', titleZh: '分部积分法 & 有理函数积分',
       visual: IntegrationViz,
-      laBridgeZh: "分部积分公式 ∫udv = uv−∫vdu 是乘积求导法则 (uv)'=u'v+uv' 的积分形式。这在线性代数中对应着伴随算子——分部积分是微分算子和积分算子的\"分部对偶关系\"。",
       content: () => (
         <div className="section-content">
           <h2>4.3 分部积分法</h2>

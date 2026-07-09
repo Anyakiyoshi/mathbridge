@@ -10,7 +10,6 @@ export const chapter10: Chapter = {
     {
       id: 'ch10-series', title: 'Convergence & Power Series', titleZh: '数项级数收敛 & 幂级数',
       visual: SeriesViz,
-      laBridgeZh: '级数收敛判别（比值、根值）本质上是在衡量序列在某种"范数"下的行为。幂级数定义了一个以多项式基 {1, x, x², ...} 展开的"坐标系"——每个解析函数都是该基下的一个点。',
       content: () => (
         <div className="section-content">
           <h2>10.1 无穷级数</h2>
@@ -35,7 +34,6 @@ export const chapter10: Chapter = {
     {
       id: 'ch10-fourier', title: 'Fourier Series', titleZh: '傅里叶级数 — 正交基',
       visual: FourierViz,
-      laBridgeZh: 'Fourier 级数把函数展开为 {1, sin(nx), cos(nx)} 的线性组合——这是一个正交基！三角函数在 L² 内积下的正交性 (∫sin(mx)sin(nx)dx = 0 for m≠n) 使得系数可独立计算。这和你在线代中学的"正交基中坐标 = 内积"完全相同。函数空间 = 无限维内积空间。',
       content: () => (
         <div className="section-content">
           <h2>10.2 傅里叶级数</h2>

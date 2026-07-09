@@ -61,14 +61,6 @@ function App() {
           <SectionContent />
         </div>
 
-        {/* Linear Algebra Bridge */}
-        {(activeSection.laBridge || activeSection.laBridgeZh) && (
-          <div className="reader-la-bridge">
-            <h4>🔗 线性代数桥梁</h4>
-            <p>{language === 'zh' ? activeSection.laBridgeZh : activeSection.laBridge}</p>
-          </div>
-        )}
-
         {/* Section Navigation */}
         <div className="reader-nav">
           <button

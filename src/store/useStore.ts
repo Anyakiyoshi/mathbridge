@@ -7,13 +7,8 @@ export interface SectionContent {
   id: string;
   title: string;
   titleZh: string;
-  // JSX content for explanation text
   content: () => ReactNode;
-  // Optional interactive visualization
   visual?: () => ReactNode;
-  // Linear algebra bridge note
-  laBridge?: string;
-  laBridgeZh?: string;
 }
 
 export interface Chapter {
