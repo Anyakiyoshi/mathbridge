@@ -10,7 +10,7 @@
     "dev": "vite",
     "dev:desktop": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
     "build": "vite build",
-    "build:desktop": "vite build --base=./ && electron-builder --win portable",
+    "build:desktop": "vite build --base=./ && electron-builder --win dir",
     "build:pages": "vite build --base=/mathbridge/",
     "lint": "oxlint",
     "preview": "vite preview",
@@ -29,7 +29,7 @@
       "public/**/*"
     ],
     "win": {
-      "target": ["portable"]
+      "target": ["dir"]
     }
   },
   "dependencies": {
