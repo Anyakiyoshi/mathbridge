@@ -3,6 +3,7 @@ import Formula from '../components/Formula';
 import { EpsilonDeltaViz } from './visuals/EpsilonDelta';
 import { LimitLawsViz } from './visuals/LimitLaws';
 import { ContinuityViz } from './visuals/Continuity';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter01: Chapter = {
   id: 'ch01', number: 1, title: 'Functions & Limits', titleZh: '函数与极限', volume: 1,
@@ -80,6 +81,12 @@ export const chapter01: Chapter = {
             <p><strong>误区 2："x 必须到达 x₀"</strong> —— 不！定义中的 0 &lt; |x−x₀| 明确排除了 x=x₀。我们只关心 <strong>x₀ 附近</strong> 的行为。</p>
             <p><strong>误区 3："极限总是函数值"</strong> —— 不！只有<strong>连续函数</strong>才有极限值等于函数值。区分极限和函数值是理解微积分的关键。</p>
           </div>
+
+          <PracticeProblem
+            context="第一章 函数与极限 - 极限的ε-δ定义"
+            question="用 ε-δ 语言证明：lim(x→1) (2x+3) = 5。请写出完整的证明过程。"
+            hint="提示：先计算 |(2x+3)−5| = |2x−2| = 2|x−1|。需要让这个值小于任意给定的 ε，那么 δ 应该取多少？"
+          />
         </div>
       ),
     },
@@ -143,6 +150,12 @@ export const chapter01: Chapter = {
             <h4>⚠ 常见误区</h4>
             <p><strong>不要分开取极限！</strong>lim [f(x)/g(x)] 不能拆成 lim f(x) / lim g(x) 如果分母极限为 0。比如 lim(x→0) sin x / x ≠ (lim sin x)/(lim x) = 0/0——这恰好是"不定式"。</p>
           </div>
+
+          <PracticeProblem
+            context="第一章 函数与极限 - 极限运算法则和两个重要极限"
+            question="求极限：lim(x→0) (sin 3x) / (2x)。请利用重要极限 lim(x→0) sin x / x = 1 的变形来计算，写出详细步骤。"
+            hint="提示：将表达式变形为 (3/2) · (sin 3x)/(3x)。当 x→0 时，令 u=3x，则 u→0，sin u / u → 1。"
+          />
         </div>
       ),
     },
@@ -205,6 +218,12 @@ export const chapter01: Chapter = {
             <p>设超额需求函数 E(p) 在价格 p 处连续。若 E(1) &lt; 0（价格太高，供过于求）且 E(100) &gt; 0（价格太低，供不应求），由介值定理，存在均衡价格 p* 使 E(p*) = 0。</p>
             <p>这证明了<strong>瓦尔拉斯均衡的存在性</strong>——一般均衡理论的数学基础就是一个连续函数的介值定理。</p>
           </div>
+
+          <PracticeProblem
+            context="第一章 函数与极限 - 函数连续性与间断点"
+            question="讨论函数 f(x) = (x²−4)/(x−2) 在 x=2 处的连续性。如果不连续，判断间断点类型，并说明能否通过补充定义使其连续。"
+            hint="提示：先求 lim(x→2) f(x)，再与 f(2)（如果存在）比较。注意分子可以因式分解。"
+          />
         </div>
       ),
     },

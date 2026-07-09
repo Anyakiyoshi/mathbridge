@@ -2,6 +2,7 @@ import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { SlopeFieldViz } from './visuals/SlopeField';
 import { ODESystemsViz } from './visuals/ODESystems';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter07: Chapter = {
   id: 'ch07', number: 7, title: 'Differential Equations', titleZh: '微分方程', volume: 1,
@@ -45,6 +46,12 @@ export const chapter07: Chapter = {
             <h4>⚠ 关键区分</h4>
             <p><strong>微分方程 ≠ 代数方程。</strong>代数方程的解是一个数，微分方程的解是一个<strong>函数</strong>。y' = y 的解不是 x=某个数，而是 y=eˣ 这样的整个函数。</p>
           </div>
+
+          <PracticeProblem
+            context="第七章 微分方程 - 方向场与解的几何意义"
+            question="验证 y = Ce^(2x) 是微分方程 y' = 2y 的通解（C 为任意常数）。然后求满足初始条件 y(0)=3 的特解。"
+            hint="提示：对 y=Ce^(2x) 求导，检查是否满足 y'=2y。代入 x=0, y=3 解出 C。"
+          />
         </div>
       ),
     },
@@ -93,6 +100,12 @@ export const chapter07: Chapter = {
             <p>当 ζ &lt; 1（阻尼不足），解为衰减振荡——经济经历繁荣-衰退周期，但振幅逐渐减小。当 ζ &gt; 1（过阻尼），经济单调趋于均衡——没有周期。</p>
             <p>这就是为什么宏观经济学关心"二阶微分方程的特征根"——它直接决定了经济是<strong>平稳增长</strong>还是<strong>周期性波动</strong>。</p>
           </div>
+
+          <PracticeProblem
+            context="第七章 微分方程 - 二阶常系数线性方程"
+            question="求解微分方程 y'' − 5y' + 6y = 0。先写出特征方程 r²−5r+6=0，求特征根，然后写出通解形式。"
+            hint="提示：特征方程 r²−5r+6=0 的根为 r=2 和 r=3（两不等实根）。通解为 y=C₁e^(2x)+C₂e^(3x)。"
+          />
         </div>
       ),
     },
@@ -154,6 +167,12 @@ export const chapter07: Chapter = {
             </ol>
             <p>矩阵指数 e^(At) 就是线性微分方程的<strong>传播子</strong>——它告诉你初始状态如何随时间演化。</p>
           </div>
+
+          <PracticeProblem
+            context="第七章 微分方程 - 微分方程组与特征值方法"
+            question="对于微分方程组 dx/dt=−x+2y, dy/dt=−2x−y。写出矩阵形式 d𝐱/dt=A𝐱，求 A 的特征值，并判断系统在原点处的稳定性（稳定结点/鞍点/焦点等）。"
+            hint="提示：A = [[−1,2],[−2,−1]]。特征方程 λ²+2λ+5=0。判别式 4−20=−16，特征根为复根。判断实部符号决定稳定性。"
+          />
         </div>
       ),
     },

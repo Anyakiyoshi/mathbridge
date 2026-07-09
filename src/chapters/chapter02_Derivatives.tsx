@@ -3,6 +3,7 @@ import Formula from '../components/Formula';
 import { TangentViz } from './visuals/TangentSecant';
 import { ChainRuleViz } from './visuals/ChainRule';
 import { HigherDerivViz } from './visuals/HigherDerivatives';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter02: Chapter = {
   id: 'ch02', number: 2, title: 'Derivatives & Differentials', titleZh: '导数与微分', volume: 1,
@@ -54,6 +55,12 @@ export const chapter02: Chapter = {
             <p><strong>"导数是切线的斜率，仅此而已"</strong> —— 不对。导数是线性变换的矩阵表示。在一维中碰巧是一个数，在多元中就是 Jacobian 矩阵。理解这一点，多元微积分就自然了。</p>
             <p><strong>"可导就是光滑"</strong> —— 不完全是。可导意味着没有尖角，但 f'(x) 本身不一定连续。存在处处可导但导数不连续的函数。</p>
           </div>
+
+          <PracticeProblem
+            context="第二章 导数与微分 - 导数定义"
+            question="利用导数的定义，求 f(x)=√x 在 x=4 处的导数。请写出完整的定义式 → 代数化简 → 取极限的过程。"
+            hint="提示：f'(4) = lim(h→0) [√(4+h) − 2]/h。分子有理化：乘以 [√(4+h)+2]/[√(4+h)+2]。"
+          />
         </div>
       ),
     },
@@ -92,6 +99,12 @@ export const chapter02: Chapter = {
             <p>长度随时间的变化率：dL/dt = (dL/dT)·(dT/dt)。</p>
             <p>第一项是材料的热膨胀系数，第二项是升温速率。两者独立可测，乘起来得到总效应——这就是链式法则的威力。</p>
           </div>
+
+          <PracticeProblem
+            context="第二章 导数与微分 - 链式法则"
+            question="设 y = sin(x²)，求 dy/dx。请用链式法则，分解为外层函数 f(u)=sin u 和内层函数 u=x²，然后分别求导再相乘。"
+            hint="提示：dy/dx = f'(u)·u'(x) = cos(u)·2x = cos(x²)·2x。"
+          />
         </div>
       ),
     },
@@ -134,6 +147,11 @@ export const chapter02: Chapter = {
           <div className="example-box">
             <p><strong>经济学应用：</strong>最优化的二阶条件——判断极值点是极大还是极小，靠的就是二阶导数（Hessian 矩阵）的正负号。泰勒展开到二阶就是二次型逼近，回到模块 D 的 Hessian 分析。</p>
           </div>
+
+          <PracticeProblem
+            context="第二章 导数与微分 - 高阶导数与泰勒展开"
+            question="求 f(x)=x⁴−2x³+5x−1 的三阶导数 f'''(x)，并说明二阶导数 f''(x) 在 x=0 处的符号意味着什么（凹凸性）。"
+          />
         </div>
       ),
     },

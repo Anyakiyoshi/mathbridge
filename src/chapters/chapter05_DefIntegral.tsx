@@ -2,6 +2,7 @@ import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { RiemannViz } from './visuals/RiemannSum';
 import { FTCViz } from './visuals/FTC';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter05: Chapter = {
   id: 'ch05', number: 5, title: 'Definite Integrals', titleZh: '定积分', volume: 1,
@@ -46,6 +47,12 @@ export const chapter05: Chapter = {
             <h4>🎮 交互演示</h4>
             <p>拖动 n 滑块增加矩形数量——n=4 时近似很粗糙，n=40 时几乎看不出误差。注意左端点和右端点的偏差方向不同，中点采样收敛最快。</p>
           </div>
+
+          <PracticeProblem
+            context="第五章 定积分 - 黎曼和"
+            question="用黎曼和（取右端点）近似计算 ∫₀² x² dx。取 n=4 个等宽矩形，写出每个矩形的面积并求和，然后与精确值 8/3 比较。"
+            hint="提示：Δx = (2−0)/4 = 0.5。右端点分别为 0.5, 1.0, 1.5, 2.0。近似和 = 0.5×[f(0.5)+f(1.0)+f(1.5)+f(2.0)]。"
+          />
         </div>
       ),
     },
@@ -79,6 +86,11 @@ export const chapter05: Chapter = {
             <p>TVC = ∫₀¹⁰⁰ MC(Q) dQ = ∫₀¹⁰⁰ (5 + 0.2Q) dQ = [5Q + 0.1Q²]₀¹⁰⁰ = 500 + 1000 = 1500。</p>
             <p>只要知道边际函数，积分就能还原总函数（差一个常数——固定成本）。这就是<strong>微积分在经济学中的核心工作流</strong>：总 → 边际（求导），边际 → 总（积分）。</p>
           </div>
+
+          <PracticeProblem
+            context="第五章 定积分 - 微积分基本定理"
+            question="利用牛顿-莱布尼茨公式计算定积分：∫₀³ (x² − 2x + 1) dx。先找出被积函数的一个原函数 F(x)，然后计算 F(3)−F(0)。"
+          />
         </div>
       ),
     },

@@ -236,6 +236,95 @@ body { overflow: hidden; height: 100vh; }
 .misconception-box h4 { font-size: 14px; color: #c62828; margin-bottom: 4px; }
 .misconception-box p { font-size: 13px; color: #5d4037; margin-bottom: 6px; }
 
+/* --- API Key --- */
+.api-key-section { margin-top: 6px; }
+.api-key-toggle {
+  font-size: 10px; padding: 3px 8px; border: 1px dashed var(--border);
+  border-radius: 6px; background: transparent; cursor: pointer;
+  color: var(--text-light);
+}
+.api-key-toggle:hover { background: var(--accent-light); }
+.api-key-input-row {
+  display: flex; gap: 3px; margin-top: 4px;
+}
+.api-key-input {
+  flex: 1; padding: 3px 6px; font-size: 10px; border: 1px solid var(--border);
+  border-radius: 4px; font-family: monospace;
+}
+.api-key-btn {
+  padding: 3px 8px; font-size: 10px; border: 1px solid var(--accent);
+  border-radius: 4px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.api-key-btn.clear {
+  background: #fff; color: var(--danger); border-color: var(--danger);
+}
+
+/* --- Practice Problem --- */
+.practice-box {
+  margin: 20px 0; padding: 20px; border: 2px solid var(--accent);
+  border-radius: 12px; background: #fafcff;
+}
+.practice-box h4 { font-size: 16px; color: var(--accent); margin-bottom: 10px; }
+.practice-question { font-size: 14px; color: var(--text); line-height: 1.8; margin-bottom: 10px; }
+.practice-hint-area { margin-bottom: 10px; }
+.hint-toggle {
+  font-size: 12px; border: none; background: transparent; color: var(--accent);
+  cursor: pointer; padding: 2px 0;
+}
+.hint-text { font-size: 13px; color: var(--text-light); margin-top: 4px; padding: 8px 12px; background: #fff8e1; border-radius: 6px; }
+.practice-input-area { display: flex; gap: 8px; align-items: flex-start; }
+.practice-input-area textarea {
+  flex: 1; padding: 10px; font-size: 14px; border: 1px solid var(--border);
+  border-radius: 8px; resize: vertical; font-family: inherit;
+  min-height: 80px;
+}
+.practice-submit {
+  padding: 10px 18px; font-size: 13px; border: none; border-radius: 8px;
+  background: var(--accent); color: #fff; cursor: pointer; white-space: nowrap;
+  font-weight: 500;
+}
+.practice-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.practice-error {
+  margin-top: 8px; padding: 8px 14px; background: #fff3f3;
+  border-radius: 6px; color: #c62828; font-size: 13px;
+}
+.practice-result { margin-top: 14px; padding: 14px; border-radius: 10px; }
+.practice-result.correct { background: #e8f5e9; border: 1px solid #a5d6a7; }
+.practice-result.partial { background: #fff8e1; border: 1px solid #ffe082; }
+.practice-result.wrong { background: #fff3f3; border: 1px solid #ef9a9a; }
+.result-header { margin-bottom: 8px; }
+.result-score { font-size: 15px; font-weight: 700; }
+.practice-result.correct .result-score { color: #2e7d32; }
+.practice-result.partial .result-score { color: #e65100; }
+.practice-result.wrong .result-score { color: #c62828; }
+.result-explanation { font-size: 13px; line-height: 1.8; color: var(--text); }
+.result-explanation p { margin-bottom: 6px; }
+.result-explanation h5, .result-explanation h4 { font-size: 14px; margin: 8px 0 4px; }
+.result-explanation li { margin-bottom: 3px; }
+.result-explanation code { font-size: 12px; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+.result-correct-answer {
+  margin-top: 8px; padding: 8px 12px; background: rgba(0,0,0,0.03);
+  border-radius: 6px; font-size: 13px;
+}
+
+/* --- Chat --- */
+.practice-chat { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px; }
+.practice-chat h5 { font-size: 14px; margin-bottom: 8px; }
+.chat-messages { max-height: 250px; overflow-y: auto; margin-bottom: 8px; }
+.chat-msg { padding: 6px 10px; margin-bottom: 6px; border-radius: 8px; font-size: 13px; line-height: 1.6; }
+.chat-msg.user { background: var(--accent-light); }
+.chat-msg.assistant { background: #f5f5f5; }
+.chat-msg strong { display: block; font-size: 11px; margin-bottom: 2px; color: var(--text-light); }
+.chat-input-row { display: flex; gap: 6px; }
+.chat-input-row input {
+  flex: 1; padding: 7px 10px; font-size: 13px; border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.chat-input-row button {
+  padding: 7px 14px; font-size: 13px; border: none; border-radius: 6px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+
 /* Matrix input */
 .matrix-input-2x2 { display: flex; align-items: center; gap: 3px; }
 .matrix-bracket { font-size: 24px; font-weight: 300; color: var(--text-light); }
