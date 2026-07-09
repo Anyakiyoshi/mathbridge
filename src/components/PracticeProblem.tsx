@@ -1,5 +1,28 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type ReactNode } from 'react';
 import { gradeAnswer, askFollowUp, generateQuestion, type GradeResult, type GeneratedQuestion } from '../utils/deepseek';
+import Formula from './Formula';
+
+// --- Render text with inline LaTeX ($...$ and $$...$$) ---
+function LatexText({ text }: { text: string }) {
+  if (!text) return null;
+  const parts: ReactNode[] = [];
+  const segs = text.split(/(\$\$[\s\S]*?\$\$)/g);
+  segs.forEach((seg, i) => {
+    if (seg.startsWith('$$') && seg.endsWith('$$')) {
+      parts.push(<Formula key={`d${i}`} latex={seg.slice(2, -2)} displayMode />);
+      return;
+    }
+    const inlineSegs = seg.split(/(\$[^$]+\$)/g);
+    inlineSegs.forEach((is, j) => {
+      if (is.startsWith('$') && is.endsWith('$')) {
+        parts.push(<Formula key={`i${i}-${j}`} latex={is.slice(1, -1)} />);
+      } else {
+        parts.push(<span key={`t${i}-${j}`}>{is}</span>);
+      }
+    });
+  });
+  return <>{parts}</>;
+}
 
 interface PracticeProblemProps {
   question?: string;     // Optional static default question
@@ -107,7 +130,7 @@ export default function PracticeProblem({ question: defaultQ, context, hint: def
       </div>
 
       <div className="practice-question">
-        <p>{isGenerating ? 'AI 正在根据本章知识点出题...' : (question || '点击"换一题"生成练习')}</p>
+        <p>{isGenerating ? 'AI 正在根据本章知识点出题...' : (question ? <LatexText text={question} /> : '点击"换一题"生成练习')}</p>
       </div>
 
       {hint && (
@@ -115,7 +138,7 @@ export default function PracticeProblem({ question: defaultQ, context, hint: def
           <button className="hint-toggle" onClick={() => setShowHint(!showHint)}>
             {showHint ? '🔽 隐藏提示' : '💡 显示提示'}
           </button>
-          {showHint && <p className="hint-text">{hint}</p>}
+          {showHint && <p className="hint-text"><LatexText text={hint} /></p>}
         </div>
       )}
 
@@ -143,11 +166,13 @@ export default function PracticeProblem({ question: defaultQ, context, hint: def
           <div className="result-header">
             <span className="result-score">{correctLabel} &nbsp; {result.score}</span>
           </div>
-          <div className="result-explanation" dangerouslySetInnerHTML={{ __html: renderMarkdown(result.explanation) }} />
+          <div className="result-explanation">
+            <LatexText text={result.explanation} />
+          </div>
           {result.correctAnswer && result.correct !== true && (
             <div className="result-correct-answer">
               <strong>正确答案：</strong>
-              <span dangerouslySetInnerHTML={{ __html: renderMarkdown(result.correctAnswer) }} />
+              <LatexText text={result.correctAnswer} />
             </div>
           )}
         </div>
@@ -160,7 +185,7 @@ export default function PracticeProblem({ question: defaultQ, context, hint: def
             {chatHistory.map((msg, i) => (
               <div key={i} className={`chat-msg ${msg.role}`}>
                 <strong>{msg.role === 'user' ? '你' : '🤖 AI 助教'}:</strong>
-                <div dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }} />
+                <LatexText text={msg.content} />
               </div>
             ))}
             <div ref={chatEndRef} />
