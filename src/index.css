@@ -221,6 +221,21 @@ body { overflow: hidden; height: 100vh; }
 .button-row button:hover { background: var(--accent-light); color: var(--accent); }
 .button-row button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
+/* --- Story & Misconception boxes --- */
+.story-box {
+  padding: 14px 18px; margin: 12px 0; border-radius: 8px;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-left: 4px solid #ff9800;
+}
+.story-box h4 { font-size: 14px; color: #e65100; margin-bottom: 6px; }
+.story-box p, .story-box li { font-size: 13px; color: #5d4037; }
+.misconception-box {
+  padding: 12px 16px; margin: 12px 0; border-radius: 8px;
+  background: #fff3f3; border-left: 4px solid #d93025;
+}
+.misconception-box h4 { font-size: 14px; color: #c62828; margin-bottom: 4px; }
+.misconception-box p { font-size: 13px; color: #5d4037; margin-bottom: 6px; }
+
 /* Matrix input */
 .matrix-input-2x2 { display: flex; align-items: center; gap: 3px; }
 .matrix-bracket { font-size: 24px; font-weight: 300; color: var(--text-light); }
