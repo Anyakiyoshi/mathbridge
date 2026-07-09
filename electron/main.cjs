@@ -2,8 +2,9 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-// 判断是否为开发模式
-const isDev = !app.isPackaged;
+// 判断是否为开发模式：看本地是否有 index.html
+const fs = require('fs');
+const isDev = !fs.existsSync(path.join(__dirname, 'index.html'));
 
 function createWindow() {
   const win = new BrowserWindow({
