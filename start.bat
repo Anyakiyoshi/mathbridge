@@ -23,8 +23,8 @@ goto desktop
 echo.
 echo   正在启动桌面应用...
 echo.
-if exist "release\MathBridge.exe" (
-    start "" "release\MathBridge.exe"
+if exist "release\win-unpacked\electron.exe" (
+    start "" "release\MathBridge.bat"
 ) else (
     echo   尚未构建，请先运行: npm run build:desktop
     echo   现在启动浏览器模式...
