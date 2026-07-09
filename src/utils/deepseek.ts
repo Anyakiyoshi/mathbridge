@@ -1,18 +1,19 @@
 // DeepSeek API client — OpenAI-compatible endpoint
-// API Key is stored in localStorage
+// API Key is read from Vite environment variable VITE_DEEPSEEK_API_KEY
+// Set it in .env.local file (gitignored, never uploaded to GitHub)
 
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
-export function getApiKey(): string | null {
-  return localStorage.getItem('deepseek_api_key');
-}
-
-export function setApiKey(key: string): void {
-  localStorage.setItem('deepseek_api_key', key);
-}
-
-export function clearApiKey(): void {
-  localStorage.removeItem('deepseek_api_key');
+function getApiKey(): string {
+  const key = import.meta.env.VITE_DEEPSEEK_API_KEY;
+  if (!key || key === 'sk-your-deepseek-api-key-here' || key.trim() === '') {
+    throw new Error(
+      'API Key 未配置。请在项目根目录的 .env.local 文件中设置:\n' +
+      'VITE_DEEPSEEK_API_KEY=sk-你的真实key\n' +
+      '然后重新运行 npm run dev 或 npm run build'
+    );
+  }
+  return key;
 }
 
 export interface ChatMessage {
@@ -22,12 +23,8 @@ export interface ChatMessage {
 
 export async function chatWithDeepSeek(
   messages: ChatMessage[],
-  stream: boolean = false
 ): Promise<string> {
   const apiKey = getApiKey();
-  if (!apiKey) {
-    throw new Error('API Key 未设置。请在侧边栏设置 DeepSeek API Key。');
-  }
 
   const response = await fetch(DEEPSEEK_API_URL, {
     method: 'POST',
@@ -40,7 +37,6 @@ export async function chatWithDeepSeek(
       messages,
       temperature: 0.3,
       max_tokens: 2000,
-      stream,
     }),
   });
 
@@ -57,15 +53,15 @@ export async function chatWithDeepSeek(
 
 export interface GradeResult {
   correct: boolean | 'partial';
-  score: string;       // e.g. "7/10"
-  explanation: string; // detailed feedback
+  score: string;
+  explanation: string;
   correctAnswer: string;
 }
 
 export async function gradeAnswer(
   question: string,
   studentAnswer: string,
-  context: string // chapter context
+  context: string
 ): Promise<GradeResult> {
   const systemPrompt = `你是一位耐心的高等数学老师。学生正在学习同济大学《高等数学》教材。
 当前章节背景：${context}
@@ -84,33 +80,23 @@ export async function gradeAnswer(
   "correctAnswer": "正确答案"
 }`;
 
-  const userPrompt = `问题：${question}
+  const userPrompt = `问题：${question}\n\n学生的回答：${studentAnswer}\n\n请评判并给出详细解释。`;
 
-学生的回答：${studentAnswer}
+  const raw = await chatWithDeepSeek([
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: userPrompt },
+  ]);
 
-请评判并给出详细解释。`;
-
-  try {
-    const raw = await chatWithDeepSeek([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ]);
-
-    // Try to parse JSON from the response
-    const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]) as GradeResult;
-    }
-    // Fallback: treat entire response as explanation
-    return {
-      correct: 'partial',
-      score: '?/10',
-      explanation: raw,
-      correctAnswer: '见上方解释',
-    };
-  } catch (err: any) {
-    throw new Error(`评判失败: ${err.message}`);
+  const jsonMatch = raw.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    return JSON.parse(jsonMatch[0]) as GradeResult;
   }
+  return {
+    correct: 'partial',
+    score: '?/10',
+    explanation: raw,
+    correctAnswer: '见上方解释',
+  };
 }
 
 // --- Follow-up chat ---

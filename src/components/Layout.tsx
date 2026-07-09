@@ -1,7 +1,5 @@
 import { useAppStore } from '../store/useStore';
 import { CHAPTERS } from '../chapters';
-import { getApiKey, setApiKey, clearApiKey } from '../utils/deepseek';
-import { useState } from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const {
@@ -9,9 +7,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     expandedChapters, toggleChapter, setActiveSection,
     language, toggleLanguage,
   } = useAppStore();
-
-  const [showApiInput, setShowApiInput] = useState(false);
-  const [apiKeyValue, setApiKeyValue] = useState(getApiKey() || '');
 
   return (
     <div className="app-layout">
@@ -27,37 +22,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <button className="lang-toggle" onClick={toggleLanguage}>
             {language === 'zh' ? 'EN' : '中文'}
           </button>
-
-          <div className="api-key-section">
-            <button className="api-key-toggle" onClick={() => setShowApiInput(!showApiInput)}>
-              🔑 {getApiKey() ? '已设置' : '设置'} API Key
-            </button>
-            {showApiInput && (
-              <div className="api-key-input-row">
-                <input
-                  type="password"
-                  value={apiKeyValue}
-                  onChange={(e) => setApiKeyValue(e.target.value)}
-                  placeholder="sk-..."
-                  className="api-key-input"
-                />
-                <button
-                  className="api-key-btn"
-                  onClick={() => { setApiKey(apiKeyValue); setShowApiInput(false); }}
-                >
-                  保存
-                </button>
-                {getApiKey() && (
-                  <button
-                    className="api-key-btn clear"
-                    onClick={() => { clearApiKey(); setApiKeyValue(''); setShowApiInput(false); }}
-                  >
-                    清除
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
         </div>
 
         <nav className="chapter-nav">

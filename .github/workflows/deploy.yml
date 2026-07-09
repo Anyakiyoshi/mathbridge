@@ -37,6 +37,7 @@ jobs:
         run: npx vite build
         env:
           BASE_URL: /${{ github.event.repository.name }}/
+          VITE_DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY || '' }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

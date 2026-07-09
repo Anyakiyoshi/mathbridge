@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { gradeAnswer, askFollowUp, getApiKey, type GradeResult } from '../utils/deepseek';
+import { gradeAnswer, askFollowUp, type GradeResult } from '../utils/deepseek';
 import Formula from './Formula';
 
 interface PracticeProblemProps {
@@ -28,10 +28,6 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
 
   const handleSubmit = async () => {
     if (!answer.trim()) return;
-    if (!getApiKey()) {
-      setError('请先在侧边栏顶部设置 DeepSeek API Key');
-      return;
-    }
     setIsJudging(true);
     setError('');
     setResult(null);
