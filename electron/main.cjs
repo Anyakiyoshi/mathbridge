@@ -12,7 +12,7 @@ function createWindow() {
     minWidth: 1000,
     minHeight: 650,
     title: 'MathBridge — 微积分 & 线性代数',
-    icon: path.join(__dirname, '../public/favicon.svg'),
+    icon: path.join(__dirname, 'favicon.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
@@ -30,7 +30,7 @@ function createWindow() {
     // win.webContents.openDevTools();
   } else {
     // 生产模式：加载打包后的静态文件
-    win.loadFile(path.join(__dirname, '../dist/index.html'));
+    win.loadFile(path.join(__dirname, 'index.html'));
   }
 
   // 外部链接在默认浏览器中打开
