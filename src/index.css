@@ -264,7 +264,20 @@ body { overflow: hidden; height: 100vh; }
   margin: 20px 0; padding: 20px; border: 2px solid var(--accent);
   border-radius: 12px; background: #fafcff;
 }
-.practice-box h4 { font-size: 16px; color: var(--accent); margin-bottom: 10px; }
+.practice-box h4 { font-size: 16px; color: var(--accent); margin-bottom: 0; }
+.practice-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.practice-header-right { display: flex; gap: 8px; align-items: center; }
+.difficulty-badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  background: var(--accent-light); color: var(--accent); font-weight: 500;
+}
+.practice-generate-btn {
+  font-size: 11px; padding: 4px 10px; border-radius: 6px;
+  border: 1px dashed var(--accent); background: transparent;
+  color: var(--accent); cursor: pointer; transition: all 0.15s;
+}
+.practice-generate-btn:hover { background: var(--accent-light); }
+.practice-generate-btn:disabled { opacity: 0.5; }
 .practice-question { font-size: 14px; color: var(--text); line-height: 1.8; margin-bottom: 10px; }
 .practice-hint-area { margin-bottom: 10px; }
 .hint-toggle {

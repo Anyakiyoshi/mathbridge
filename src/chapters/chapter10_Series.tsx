@@ -2,6 +2,7 @@ import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { SeriesViz } from './visuals/SeriesConvergence';
 import { FourierViz } from './visuals/FourierSeries';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter10: Chapter = {
   id: 'ch10', number: 10, title: 'Infinite Series', titleZh: '无穷级数', volume: 2,
@@ -26,6 +27,8 @@ export const chapter10: Chapter = {
           <h3>幂级数</h3>
           <p><Formula latex="\sum c_n (x-a)^n" /> 在收敛半径内表示一个函数。</p>
           <p>泰勒级数就是幂级数！收敛半径取决于函数奇点的位置。</p>
+
+          <PracticeProblem context="第十章 无穷级数 - 数项级数收敛与幂级数" />
         </div>
       ),
     },
@@ -46,6 +49,8 @@ export const chapter10: Chapter = {
               和线代中 <Formula latex="c_i = \langle v, e_i \rangle" /> 一模一样。</p>
             <p><strong>函数空间 = 无限维希尔伯特空间</strong>。有限维向量空间的每一件事——基、坐标、内积、正交投影——在函数空间中都有对应。</p>
           </div>
+
+          <PracticeProblem context="第十章 无穷级数 - 傅里叶级数与正交基" />
         </div>
       ),
     },

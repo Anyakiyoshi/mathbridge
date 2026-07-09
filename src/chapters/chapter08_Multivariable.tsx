@@ -2,6 +2,7 @@ import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { PartialDerivViz } from './visuals/PartialDerivative';
 import { GradientDescentViz } from './visuals/GradientDescentViz';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter08: Chapter = {
   id: 'ch08', number: 8, title: 'Multivariable Calculus', titleZh: '多元函数微分学', volume: 2,
@@ -17,6 +18,8 @@ export const chapter08: Chapter = {
           <p><Formula latex="\frac{\partial f}{\partial x} = \lim_{h \to 0}\frac{f(x+h,y)-f(x,y)}{h}" /></p>
           <p><strong>全微分</strong>：<Formula latex="dz = \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial y}dy" /></p>
           <p>这意味着微小变化可以线性近似——这正是<strong>Jacobian 矩阵</strong>的思想。</p>
+
+          <PracticeProblem context="第八章 多元函数微分学 - 偏导数与全微分" />
         </div>
       ),
     },
@@ -30,6 +33,8 @@ export const chapter08: Chapter = {
           <p>方向导数：<Formula latex="D_{\mathbf{u}}f = \nabla f \cdot \mathbf{u}" /></p>
           <p>梯度 <Formula latex="\nabla f = (\partial f/\partial x, \partial f/\partial y)" /> 是函数值增长最快的方向。</p>
           <p><strong>梯度下降</strong>：沿负梯度方向迭代寻找极小值。这是机器学习最基本的优化算法。</p>
+
+          <PracticeProblem context="第八章 多元函数微分学 - 方向导数与梯度下降" />
         </div>
       ),
     },
@@ -42,6 +47,8 @@ export const chapter08: Chapter = {
           <h3>拉格朗日乘数法</h3>
           <p>约束优化：<Formula latex="\nabla f = \lambda \nabla g" />，<Formula latex="g(x,y) = 0" /></p>
           <p>经济学核心应用：效用最大化（预算约束）、成本最小化（产量约束）。</p>
+
+          <PracticeProblem context="第八章 多元函数微分学 - 极值与拉格朗日乘数法" />
         </div>
       ),
     },

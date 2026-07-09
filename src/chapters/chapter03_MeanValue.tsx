@@ -1,6 +1,7 @@
 import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { RolleLagrangeViz } from './visuals/RolleLagrange';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter03: Chapter = {
   id: 'ch03', number: 3, title: 'Mean Value Theorems', titleZh: '微分中值定理', volume: 1,
@@ -27,6 +28,8 @@ export const chapter03: Chapter = {
             <li>若 f'(x) ≡ 0，则 f 为常值函数</li>
             <li>若 f'(x) &gt; 0，则 f 严格递增（经济学中"边际 &gt; 0"的理论基础）</li>
           </ul>
+
+          <PracticeProblem context="第三章 微分中值定理 - 罗尔定理与拉格朗日中值定理" />
         </div>
       ),
     },

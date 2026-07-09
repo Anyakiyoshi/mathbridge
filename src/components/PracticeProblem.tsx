@@ -1,14 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
-import { gradeAnswer, askFollowUp, type GradeResult } from '../utils/deepseek';
-import Formula from './Formula';
+import { gradeAnswer, askFollowUp, generateQuestion, type GradeResult, type GeneratedQuestion } from '../utils/deepseek';
 
 interface PracticeProblemProps {
-  question: string;      // The problem statement (support Markdown/LaTeX)
+  question?: string;     // Optional static default question
   context: string;       // Chapter context for AI
-  hint?: string;         // Optional hint
+  hint?: string;         // Optional default hint
 }
 
-export default function PracticeProblem({ question, context, hint }: PracticeProblemProps) {
+export default function PracticeProblem({ question: defaultQ, context, hint: defaultHint }: PracticeProblemProps) {
+  // Dynamic question state
+  const [question, setQuestion] = useState(defaultQ || '');
+  const [hint, setHint] = useState(defaultHint || '');
+  const [difficulty, setDifficulty] = useState('中等');
+  const [prevQuestions, setPrevQuestions] = useState<string[]>(defaultQ ? [defaultQ] : []);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  // Answer state
   const [answer, setAnswer] = useState('');
   const [isJudging, setIsJudging] = useState(false);
   const [result, setResult] = useState<GradeResult | null>(null);
@@ -19,15 +26,38 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
   const [followUp, setFollowUp] = useState('');
   const [chatHistory, setChatHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [isChatting, setIsChatting] = useState(false);
-
   const chatEndRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [chatHistory]);
+
+  // Auto-generate first question if none provided
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatHistory]);
+    if (!defaultQ && !question) {
+      handleGenerate();
+    }
+  }, []);
+
+  const handleGenerate = async () => {
+    setIsGenerating(true);
+    setError('');
+    setResult(null);
+    setAnswer('');
+    setChatHistory([]);
+    setShowHint(false);
+    try {
+      const gen = await generateQuestion(context, prevQuestions, difficulty);
+      setQuestion(gen.question);
+      setHint(gen.hint);
+      setPrevQuestions((prev) => [...prev, gen.question]);
+      setDifficulty(gen.difficulty);
+    } catch (err: any) {
+      setError(err.message || '出题失败，请检查 API Key');
+    }
+    setIsGenerating(false);
+  };
 
   const handleSubmit = async () => {
-    if (!answer.trim()) return;
+    if (!answer.trim() || !question) return;
     setIsJudging(true);
     setError('');
     setResult(null);
@@ -62,9 +92,22 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
 
   return (
     <div className="practice-box">
-      <h4>📝 练习</h4>
+      <div className="practice-header">
+        <h4>📝 练习</h4>
+        <div className="practice-header-right">
+          <span className="difficulty-badge">{difficulty}</span>
+          <button
+            className="practice-generate-btn"
+            onClick={handleGenerate}
+            disabled={isGenerating}
+          >
+            {isGenerating ? '⏳ 生成中...' : '🔄 换一题'}
+          </button>
+        </div>
+      </div>
+
       <div className="practice-question">
-        <p>{question}</p>
+        <p>{isGenerating ? 'AI 正在根据本章知识点出题...' : (question || '点击"换一题"生成练习')}</p>
       </div>
 
       {hint && (
@@ -87,7 +130,7 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
         <button
           className="practice-submit"
           onClick={handleSubmit}
-          disabled={isJudging || !answer.trim()}
+          disabled={isJudging || !answer.trim() || !question}
         >
           {isJudging ? '⏳ AI 评判中...' : '📤 提交评判'}
         </button>
@@ -110,7 +153,6 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
         </div>
       )}
 
-      {/* Follow-up chat */}
       {result && (
         <div className="practice-chat">
           <h5>💬 追问 AI 助教</h5>
@@ -141,25 +183,17 @@ export default function PracticeProblem({ question, context, hint }: PracticePro
   );
 }
 
-// Simple Markdown→HTML renderer (bold, code, LaTeX delimiters preserved)
 function renderMarkdown(text: string): string {
   if (!text) return '';
   let html = text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    // Bold
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    // Inline code
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Headers
     .replace(/^### (.+)$/gm, '<h5>$1</h5>')
     .replace(/^## (.+)$/gm, '<h4>$1</h4>')
     .replace(/^# (.+)$/gm, '<h3>$1</h3>')
-    // Lists
     .replace(/^- (.+)$/gm, '<li>$1</li>')
     .replace(/^(\d+)\. (.+)$/gm, '<li>$1. $2</li>')
-    // Line breaks
     .replace(/\n\n/g, '</p><p>')
     .replace(/\n/g, '<br/>');
   return `<p>${html}</p>`;

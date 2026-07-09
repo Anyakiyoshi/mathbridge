@@ -122,3 +122,56 @@ export async function askFollowUp(
 
   return await chatWithDeepSeek(allMessages);
 }
+
+// --- Generate a new practice question ---
+export interface GeneratedQuestion {
+  question: string;
+  hint: string;
+  difficulty: string; // e.g. "基础" / "中等" / "挑战"
+}
+
+export async function generateQuestion(
+  context: string,
+  previousQuestions: string[] = [],
+  difficulty: string = '中等'
+): Promise<GeneratedQuestion> {
+  const prevQs = previousQuestions.length > 0
+    ? `之前出过的题目（不要重复）：\n${previousQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
+    : '';
+
+  const systemPrompt = `你是一位高等数学老师，需要为学生出练习题。
+当前章节背景：${context}
+难度要求：${difficulty}
+
+${prevQs}
+
+请出一道新的练习题，要求：
+1. 题目清晰完整，适合当前章节的知识范围
+2. 给出一个简洁的提示（不直接给答案，但给出解题方向）
+3. 标注难度
+
+请以 JSON 格式回复：
+{
+  "question": "题目描述（可使用 LaTeX 公式，如 $\\\\int x^2 dx$）",
+  "hint": "简洁提示（1-2句话）",
+  "difficulty": "基础/中等/挑战"
+}`;
+
+  const raw = await chatWithDeepSeek([
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: '请出一道新题。' },
+  ]);
+
+  const jsonMatch = raw.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    try {
+      return JSON.parse(jsonMatch[0]) as GeneratedQuestion;
+    } catch { /* fall through */ }
+  }
+  // Fallback
+  return {
+    question: '请用本章知识计算: ∫ x·sin(x²) dx',
+    hint: '使用换元法，令 u = x²',
+    difficulty: '中等',
+  };
+}

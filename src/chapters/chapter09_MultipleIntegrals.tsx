@@ -1,6 +1,7 @@
 import type { Chapter } from '../store/useStore';
 import Formula from '../components/Formula';
 import { DoubleIntegralViz } from './visuals/DoubleIntegral';
+import PracticeProblem from '../components/PracticeProblem';
 
 export const chapter09: Chapter = {
   id: 'ch09', number: 9, title: 'Multiple Integrals', titleZh: '重积分', volume: 2,
@@ -18,6 +19,8 @@ export const chapter09: Chapter = {
           <p><Formula latex="\iint f(x,y)dxdy = \iint f(u,v)|J|dudv" /></p>
           <p>其中 <Formula latex="J = \frac{\partial(x,y)}{\partial(u,v)}" /> 是 Jacobian 行列式。</p>
           <p>这就是线性变换行列式（面积缩放因子）在非线性情况下的推广！</p>
+
+          <PracticeProblem context="第九章 重积分 - 二重积分的几何意义与计算" />
         </div>
       ),
     },
